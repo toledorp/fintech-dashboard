@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useDeleteTransaction, useTransactions } from "../hooks/useTransactions";
 import { NewTransaction } from "../components/NewTransaction";
+import { Chart } from "../components/Chart";
 
 type FilterType = "all" | "income" | "expense";
 
@@ -82,6 +83,8 @@ export function Transactions() {
             </strong>
           </article>
         </section>
+
+        <Chart incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
 
         <NewTransaction />
 

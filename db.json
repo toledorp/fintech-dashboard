@@ -20,6 +20,14 @@
       "type": "income",
       "date": "2026-04-07T16:14:02.307Z",
       "id": "ZAwTCJ-VWrc"
+    },
+    {
+      "description": "Saque",
+      "amount": 750,
+      "type": "expense",
+      "date": "2026-04-07T17:16:55.172Z",
+      "id": "CGK23XczXIQ"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
