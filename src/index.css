@@ -278,6 +278,20 @@ button {
   color: #f87171;
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.filters-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
 @media (max-width: 768px) {
   .dashboard-card {
     padding: 20px;
@@ -305,6 +319,10 @@ button {
   }
 
   .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+    .filters-bar {
     grid-template-columns: 1fr;
   }
 }
