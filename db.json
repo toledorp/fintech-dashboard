@@ -1,3 +1,19 @@
 {
-    "transactions": []
+  "transactions": [
+    {
+      "description": "Deposito",
+      "amount": 1000,
+      "type": "income",
+      "date": "2026-04-07T15:22:37.124Z",
+      "id": "nkKwyUxfsL4"
+    },
+    {
+      "description": "Saque",
+      "amount": 500,
+      "type": "expense",
+      "date": "2026-04-07T15:28:05.134Z",
+      "id": "u9mqbjQeN1A"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
