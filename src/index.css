@@ -304,6 +304,247 @@ button {
   padding: 20px;
 }
 
+.bi-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  background:
+    radial-gradient(circle at top, rgba(96, 165, 250, 0.12), transparent 28%),
+    linear-gradient(180deg, #eef3fb 0%, #dde8f7 100%);
+  color: #0f172a;
+}
+
+.bi-sidebar {
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+  border-right: 1px solid rgba(148, 163, 184, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 12px;
+  gap: 24px;
+}
+
+.bi-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+}
+
+.bi-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.bi-nav-item {
+  width: 100%;
+  padding: 12px 8px;
+  border-radius: 14px;
+  background: transparent;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.bi-nav-item.active {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  color: white;
+}
+
+.bi-content {
+  padding: 28px;
+}
+
+.bi-header {
+  margin-bottom: 20px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #b7e3a1 0%, #7fb4f0 100%);
+  color: #1e293b;
+  box-shadow: 0 10px 30px rgba(30, 41, 59, 0.08);
+}
+
+.bi-header h1 {
+  margin: 4px 0;
+  font-size: 2rem;
+}
+
+.bi-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bi-subtitle {
+  margin: 0;
+  color: #334155;
+}
+
+.bi-summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.bi-metric-card {
+  border-radius: 18px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.bi-metric-card span {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.bi-metric-card strong {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.income-card strong {
+  color: #16a34a;
+}
+
+.expense-card strong {
+  color: #dc2626;
+}
+
+.balance-card strong {
+  color: #2563eb;
+}
+
+.bi-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+}
+
+.bi-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  padding: 18px;
+}
+
+.bi-panel-large {
+  min-height: 360px;
+}
+
+.bi-panel-wide {
+  grid-column: 1 / -1;
+}
+
+.bi-panel-header {
+  margin-bottom: 14px;
+}
+
+.bi-panel-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #4338ca;
+}
+
+.bi-analysis-list {
+  display: grid;
+  gap: 12px;
+}
+
+.bi-analysis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.bi-analysis-row strong {
+  color: #0f172a;
+}
+
+.powerbi-filters {
+  margin-bottom: 18px;
+}
+
+.bi-panel .form-card,
+.bi-panel .chart-section,
+.bi-panel .chart-card {
+  margin-top: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.bi-panel .transaction-card {
+  background: #f8fbff;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.bi-panel .transaction-top h3 {
+  color: #0f172a;
+}
+
+.bi-panel .transaction-date {
+  color: #64748b;
+}
+
+.bi-panel .transaction-amount {
+  color: #0f172a;
+}
+
+@media (max-width: 1024px) {
+  .bi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bi-panel-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .bi-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bi-sidebar {
+    flex-direction: row;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  .bi-nav {
+    flex-direction: row;
+  }
+
+  .bi-content {
+    padding: 16px;
+  }
+
+  .bi-summary-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-card {
     padding: 20px;
