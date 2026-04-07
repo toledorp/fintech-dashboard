@@ -1,12 +1,15 @@
+import { useMemo, useState } from "react";
 import { useDeleteTransaction, useTransactions } from "../hooks/useTransactions";
 import { NewTransaction } from "../components/NewTransaction";
+
+type FilterType = "all" | "income" | "expense";
 
 export function Transactions() {
   const { data, isLoading, error } = useTransactions();
   const deleteTransaction = useDeleteTransaction();
 
-  if (isLoading) return <p className="status-message">Carregando...</p>;
-  if (error) return <p className="status-message">Erro ao carregar transações.</p>;
+  const [typeFilter, setTypeFilter] = useState<FilterType>("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const transactions = data ?? [];
 
@@ -20,11 +23,27 @@ export function Transactions() {
 
   const balanceTotal = incomeTotal - expenseTotal;
 
+  const filteredTransactions = useMemo(() => {
+    return transactions.filter((transaction) => {
+      const matchesType =
+        typeFilter === "all" ? true : transaction.type === typeFilter;
+
+      const matchesSearch = transaction.description
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      return matchesType && matchesSearch;
+    });
+  }, [transactions, typeFilter, searchTerm]);
+
   const formatCurrency = (value: number) =>
     new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL",
     }).format(value);
+
+  if (isLoading) return <p className="status-message">Carregando...</p>;
+  if (error) return <p className="status-message">Erro ao carregar transações.</p>;
 
   return (
     <main className="app-container">
@@ -67,16 +86,38 @@ export function Transactions() {
         <NewTransaction />
 
         <section className="transactions-section">
-          <h2>Histórico</h2>
+          <div className="section-header">
+            <h2>Histórico</h2>
+          </div>
 
-          {transactions.length === 0 && (
+          <div className="filters-bar">
+            <input
+              className="form-input"
+              type="text"
+              placeholder="Buscar por descrição"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+
+            <select
+              className="form-input"
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value as FilterType)}
+            >
+              <option value="all">Todos</option>
+              <option value="income">Entradas</option>
+              <option value="expense">Saídas</option>
+            </select>
+          </div>
+
+          {filteredTransactions.length === 0 && (
             <div className="empty-state">
-              <p>Nenhuma transação cadastrada.</p>
+              <p>Nenhuma transação encontrada para os filtros aplicados.</p>
             </div>
           )}
 
           <div className="transactions-list">
-            {transactions.map((transaction) => (
+            {filteredTransactions.map((transaction) => (
               <article key={transaction.id} className="transaction-card">
                 <div className="transaction-top">
                   <div>
