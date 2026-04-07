@@ -47,114 +47,154 @@ export function Transactions() {
   if (error) return <p className="status-message">Erro ao carregar transações.</p>;
 
   return (
-    <main className="app-container">
-      <section className="dashboard-card">
-        <header className="page-header">
+    <main className="bi-layout">
+      <aside className="bi-sidebar">
+        <div className="bi-logo">AB</div>
+
+        <nav className="bi-nav">
+          <button className="bi-nav-item active">Dashboard</button>
+          <button className="bi-nav-item">Fluxo</button>
+          <button className="bi-nav-item">Resumo</button>
+        </nav>
+      </aside>
+
+      <section className="bi-content">
+        <header className="bi-header">
           <div>
-            <p className="eyebrow">AIRBANK</p>
-            <h1>Transações</h1>
-            <p className="subtitle">Gerencie suas entradas e saídas em um só lugar.</p>
+            <p className="bi-kicker">AIRBANK ANALYTICS</p>
+            <h1>Dashboard Financeiro</h1>
+            <p className="bi-subtitle">
+              Controle de fluxo de caixa com visão analítica das movimentações.
+            </p>
           </div>
         </header>
 
-        <section className="summary-grid">
-          <article className="summary-card">
-            <span className="summary-label">Entradas</span>
-            <strong className="summary-value income-text">
-              {formatCurrency(incomeTotal)}
-            </strong>
+        <section className="bi-summary-row">
+          <article className="bi-metric-card income-card">
+            <span>Entradas</span>
+            <strong>{formatCurrency(incomeTotal)}</strong>
           </article>
 
-          <article className="summary-card">
-            <span className="summary-label">Saídas</span>
-            <strong className="summary-value expense-text">
-              {formatCurrency(expenseTotal)}
-            </strong>
+          <article className="bi-metric-card expense-card">
+            <span>Saídas</span>
+            <strong>{formatCurrency(expenseTotal)}</strong>
           </article>
 
-          <article className="summary-card highlight">
-            <span className="summary-label">Saldo</span>
-            <strong
-              className={`summary-value ${
-                balanceTotal >= 0 ? "income-text" : "expense-text"
-              }`}
-            >
-              {formatCurrency(balanceTotal)}
-            </strong>
+          <article className="bi-metric-card balance-card">
+            <span>Saldo</span>
+            <strong>{formatCurrency(balanceTotal)}</strong>
           </article>
         </section>
 
-        <Chart incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
-
-        <NewTransaction />
-
-        <section className="transactions-section">
-          <div className="section-header">
-            <h2>Histórico</h2>
-          </div>
-
-          <div className="filters-bar">
-            <input
-              className="form-input"
-              type="text"
-              placeholder="Buscar por descrição"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-
-            <select
-              className="form-input"
-              value={typeFilter}
-              onChange={(e) => setTypeFilter(e.target.value as FilterType)}
-            >
-              <option value="all">Todos</option>
-              <option value="income">Entradas</option>
-              <option value="expense">Saídas</option>
-            </select>
-          </div>
-
-          {filteredTransactions.length === 0 && (
-            <div className="empty-state">
-              <p>Nenhuma transação encontrada para os filtros aplicados.</p>
+        <section className="bi-grid">
+          <div className="bi-panel bi-panel-large">
+            <div className="bi-panel-header">
+              <h2>Evolução Receitas vs Despesas</h2>
             </div>
-          )}
+            <Chart incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
+          </div>
 
-          <div className="transactions-list">
-            {filteredTransactions.map((transaction) => (
-              <article key={transaction.id} className="transaction-card">
-                <div className="transaction-top">
-                  <div>
-                    <h3>{transaction.description}</h3>
-                    <p className="transaction-date">
-                      {new Date(transaction.date).toLocaleString("pt-BR")}
-                    </p>
+          <div className="bi-panel">
+            <div className="bi-panel-header">
+              <h2>Análise das Movimentações</h2>
+            </div>
+
+            <div className="bi-analysis-list">
+              <div className="bi-analysis-row">
+                <span>Total de transações</span>
+                <strong>{transactions.length}</strong>
+              </div>
+              <div className="bi-analysis-row">
+                <span>Entradas</span>
+                <strong>{transactions.filter((t) => t.type === "income").length}</strong>
+              </div>
+              <div className="bi-analysis-row">
+                <span>Saídas</span>
+                <strong>{transactions.filter((t) => t.type === "expense").length}</strong>
+              </div>
+              <div className="bi-analysis-row">
+                <span>Saldo atual</span>
+                <strong>{formatCurrency(balanceTotal)}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="bi-panel">
+            <div className="bi-panel-header">
+              <h2>Filtros</h2>
+            </div>
+
+            <div className="filters-bar powerbi-filters">
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Buscar por descrição"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+
+              <select
+                className="form-input"
+                value={typeFilter}
+                onChange={(e) => setTypeFilter(e.target.value as FilterType)}
+              >
+                <option value="all">Todos</option>
+                <option value="income">Entradas</option>
+                <option value="expense">Saídas</option>
+              </select>
+            </div>
+
+            <NewTransaction />
+          </div>
+
+          <div className="bi-panel bi-panel-wide">
+            <div className="bi-panel-header">
+              <h2>Histórico das Transações</h2>
+            </div>
+
+            {filteredTransactions.length === 0 && (
+              <div className="empty-state">
+                <p>Nenhuma transação encontrada para os filtros aplicados.</p>
+              </div>
+            )}
+
+            <div className="transactions-list">
+              {filteredTransactions.map((transaction) => (
+                <article key={transaction.id} className="transaction-card">
+                  <div className="transaction-top">
+                    <div>
+                      <h3>{transaction.description}</h3>
+                      <p className="transaction-date">
+                        {new Date(transaction.date).toLocaleString("pt-BR")}
+                      </p>
+                    </div>
+
+                    <span
+                      className={
+                        transaction.type === "income"
+                          ? "transaction-badge income"
+                          : "transaction-badge expense"
+                      }
+                    >
+                      {transaction.type === "income" ? "Entrada" : "Saída"}
+                    </span>
                   </div>
 
-                  <span
-                    className={
-                      transaction.type === "income"
-                        ? "transaction-badge income"
-                        : "transaction-badge expense"
-                    }
-                  >
-                    {transaction.type === "income" ? "Entrada" : "Saída"}
-                  </span>
-                </div>
+                  <p className="transaction-amount">
+                    {formatCurrency(transaction.amount)}
+                  </p>
 
-                <p className="transaction-amount">
-                  {formatCurrency(transaction.amount)}
-                </p>
-
-                <div className="transaction-actions">
-                  <button
-                    className="delete-button"
-                    onClick={() => deleteTransaction.mutate(transaction.id)}
-                  >
-                    Deletar
-                  </button>
-                </div>
-              </article>
-            ))}
+                  <div className="transaction-actions">
+                    <button
+                      className="delete-button"
+                      onClick={() => deleteTransaction.mutate(transaction.id)}
+                    >
+                      Deletar
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       </section>
