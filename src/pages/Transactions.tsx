@@ -180,7 +180,6 @@ export function Transactions() {
             <div className="bi-panel-header">
               <h2>Evolução Receitas vs Despesas</h2>
             </div>
-
             <Chart incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
           </div>
 
