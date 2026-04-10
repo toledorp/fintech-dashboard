@@ -1,6 +1,6 @@
 # 💰 Fintech Dashboard
 
-Dashboard financeiro moderno para controle de receitas e despesas, com visual analítico, filtros inteligentes e integração com API simulada.
+Dashboard financeiro moderno para controle de receitas e despesas, com visual analítico, filtros inteligentes e integração com API mock.
 
 ---
 
@@ -8,9 +8,13 @@ Dashboard financeiro moderno para controle de receitas e despesas, com visual an
 
 ### 🔐 Autenticação
 
-* Tela de login
-* Controle de usuário via estado global
-* Proteção de rotas
+* Login mock (usuário: **admin | senha: 123456**)
+* Geração de token simulado
+* Armazenamento no Redux Toolkit
+* Proteção de rotas privadas
+* Logout com limpeza de estado
+
+---
 
 ### 📊 Dashboard Financeiro
 
@@ -18,9 +22,11 @@ Dashboard financeiro moderno para controle de receitas e despesas, com visual an
 
   * Entradas
   * Saídas
-  * Saldo atual
-* Gráfico comparativo (Entradas vs Saídas)
-* Análise de movimentações
+  * Saldo total
+* Gráfico comparativo (Recharts)
+* Atualização automática dos dados
+
+---
 
 ### 💸 Transações
 
@@ -28,26 +34,25 @@ Dashboard financeiro moderno para controle de receitas e despesas, com visual an
 * Criação de nova transação
 * Edição de transações
 * Exclusão de transações
-* Badge visual (Entrada / Saída)
+* Atualização automática com React Query (invalidate cache)
 
-### 🔎 Filtros inteligentes
+---
+
+### 🔎 Filtros
 
 * Busca por descrição
-* Filtro por tipo (Entrada / Saída)
+* Filtro por tipo (entrada/saída)
 * Filtro por mês
 
-### 🎨 Interface (UI/UX)
+---
 
-* Layout moderno estilo dashboard
-* Sidebar simplificada
-* Botão de nova transação reposicionado (melhor UX)
-* Histórico com scroll interno
-* Melhor aproveitamento de espaço
+### 🎨 Interface
 
-### 🌙 Tema Dark Mode
-
-* Alternância entre tema claro e escuro
-* Persistência de tema
+* Layout estilo dashboard
+* Responsivo (mobile e desktop)
+* Dark mode com persistência
+* Feedback com toast (sucesso e erro)
+* Loading visual durante requisições
 
 ---
 
@@ -55,25 +60,27 @@ Dashboard financeiro moderno para controle de receitas e despesas, com visual an
 
 * React + TypeScript
 * Vite
-* Context API / Hooks
-* JSON Server (API fake)
-* CSS customizado (design system próprio)
+* Redux Toolkit
+* TanStack Query (React Query)
+* React Router
+* Axios
+* React Hook Form + Zod
+* React Toastify
+* Recharts
+* JSON Server (API mock)
 
 ---
 
 ## 📡 API (Mock)
 
-Utilizando JSON Server:
+Utilizando JSON Server com `db.json`.
 
-```bash
-npx json-server --watch db.json --port 3001
-```
+Endpoints:
 
-Endpoint principal:
-
-```
-http://localhost:3001/transactions
-```
+* `GET /transactions`
+* `POST /transactions`
+* `PUT /transactions/:id`
+* `DELETE /transactions/:id`
 
 ---
 
@@ -85,16 +92,19 @@ http://localhost:3001/transactions
 npm install
 ```
 
-### 2. Rodar a aplicação
+### 2. Rodar aplicação + API
 
 ```bash
 npm run dev
 ```
 
-### 3. Rodar a API
+---
 
-```bash
-npx json-server --watch db.json --port 3001
+## 🔑 Login de acesso
+
+```txt
+Usuário: admin
+Senha: 123456
 ```
 
 ---
@@ -105,9 +115,9 @@ npx json-server --watch db.json --port 3001
 src/
  ├── components/
  ├── pages/
+ ├── hooks/
  ├── services/
  ├── store/
- ├── hooks/
  ├── types/
  └── utils/
 ```
@@ -116,41 +126,28 @@ src/
 
 ## 🧠 Decisões técnicas
 
-* Uso de `useMemo` para otimização de filtros
-* Separação de responsabilidades (pages, services, hooks)
-* API simulada para facilitar testes sem backend real
-* Layout responsivo com foco em dashboard profissional
-* Scroll interno no histórico para melhor UX
+* Uso de React Query para cache e sincronização
+* Redux Toolkit para estado global (auth e tema)
+* Separação de responsabilidades por camadas
+* Hooks customizados para lógica reutilizável
+* API mock com JSON Server para simular backend
 
 ---
 
-## ⚠️ Desafios encontrados
+## ⚠️ Limitações
 
-* Conflitos de merge ao integrar mudanças locais e remotas
-* Ajustes no `useMemo` para evitar warnings do React Hooks
-* Organização do layout (filtros vs histórico)
-* Sincronização com JSON Server
+* Autenticação mock (sem backend real)
+* Cadastro de usuário não persistido no banco
+* Sem testes automatizados
 
 ---
 
 ## 📸 Preview
 
-👉 (adicione aqui um print ou GIF da aplicação)
-
----
-
-## 📌 Melhorias futuras
-
-* Integração com backend real
-* Autenticação com JWT
-* Dashboard com múltiplos gráficos
-* Paginação no histórico
-* Upload de comprovantes
+👉 (adicione aqui um print da aplicação)
 
 ---
 
 ## 👨‍💻 Autor
 
 Desenvolvido por **Rogerio Pupo**
-
----
